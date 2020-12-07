@@ -8,11 +8,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClienteService {
 
-    @Autowired //    Injeção no própria Declaração
+//    @Autowired //    Injeção no própria Declaração
+//    private ClienteRepository repository;
+
     private ClienteRepository repository;
+    @Autowired //    Injeção via set // basta digitar set que a IDE sugere
+    public void setRepository(ClienteRepository repository) {
+        this.repository = repository;
+    }
 
 //    Injeção no próprio construtor = melhor opção e até para testes unitários
-//    public ClienteService(ClienteRepository repository) {
+//    private ClienteRepository repository;
 //    public ClienteService(ClienteRepository repository) {
 //        this.repository = repository;
 //    }
