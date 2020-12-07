@@ -2,3 +2,7 @@
 vendas\.iml
 
 \.idea/
+
+target/classes/io/github/lucianoza/vendasApplication\.class
+
+target/classes/io/github/lucianoza/ApplicationConfiguration\.class
