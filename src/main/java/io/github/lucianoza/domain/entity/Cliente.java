@@ -1,8 +1,16 @@
 package io.github.lucianoza.domain.entity;
 
-public class Cliente {
+import javax.persistence.*;
 
+@Entity
+//@Table(name = "cliente") //ex: (name = "tb_cliente", schema = "vendas") Opcional se nome da tabela = nome da classe
+public class Cliente {
+    @Id //define chave primária. É obrigatória em uma entidade!
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
+
+    @Column(name="nome", length = 100)
     private String nome;
 
     public Cliente() {
