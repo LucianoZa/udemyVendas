@@ -27,37 +27,36 @@ public class vendasApplication {
             List<Cliente> todosClientes = clientes. obterTodos();
             System.out.println("---Lista Todos Clientes---");
             todosClientes.forEach(System.out::println);
-//
-//            System.out.println("---Altera Todos---");
-//            todosClientes.forEach(c -> {
-//                c.setNome(c.getNome() + " atualizado!");
-//                clientes.atualizar(c);
-//            });
-//
-//            System.out.println("---busca Cli e imprime---");
-//            clientes.buscarPorNome("Cli").forEach(System.out::println);
-//
-//            todosClientes = clientes.obterTodos();
-//            System.out.println("---Lista Todos Clientes Alterados---");
-//            todosClientes.forEach(System.out::println);
-//
-//            System.out.println(".");
-//            System.out.println(".");
-//            System.out.println(".");
-//            System.out.println("deletando cliente");
 
+            System.out.println("---Altera Todos---");
+            todosClientes.forEach(c -> {
+                c.setNome(c.getNome() + " atualizado!");
+                clientes.atualizar(c);
+            });
+
+            System.out.println("---busca Cli e imprime---");
+            clientes.buscarPorNome("Cli").forEach(System.out::println);
+
+            todosClientes = clientes.obterTodos();
+            System.out.println("---Lista Todos Clientes Alterados---");
+            todosClientes.forEach(System.out::println);
+
+            System.out.println(".");
+            System.out.println(".");
+            System.out.println(".");
+//            System.out.println("deletando cliente");
             //Deletar
 //            clientes.obterTodos().forEach(c->{
 //                clientes.deletar(c);
 //            });
 
-//            todosClientes = clientes.obterTodos();
-//            System.out.println("---Lista Todos Clientes após deleção---");
-//            if(todosClientes.isEmpty()){
-//                System.out.println("Nenhum Cliente Encontrado");
-//            } else {
-//                todosClientes.forEach(System.out::println);
-//            }
+            todosClientes = clientes.obterTodos();
+            System.out.println("---Lista Todos Clientes após deleção---");
+            if(todosClientes.isEmpty()){
+                System.out.println("Nenhum Cliente Encontrado");
+            } else {
+                todosClientes.forEach(System.out::println);
+            }
         };
     }
 
