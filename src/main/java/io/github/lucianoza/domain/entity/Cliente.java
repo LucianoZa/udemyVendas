@@ -2,14 +2,26 @@ package io.github.lucianoza.domain.entity;
 
 public class Cliente {
 
-    private String id;
+    private Integer id;
     private String nome;
 
-    public String getId() {
+    public Cliente() {
+    }
+
+    public Cliente(Integer id, String nome) {
+        this.id = id;
+        this.nome = nome;
+    }
+
+    public Cliente(String nome) {
+        this.nome = nome;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -19,5 +31,13 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                '}';
     }
 }
