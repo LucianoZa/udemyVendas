@@ -10,25 +10,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@SpringBootApplication @RestController //veio com spring-boot-starter-web
+@SpringBootApplication
+@RestController //veio com spring-boot-starter-web
 public class vendasApplication {
-
-//    @Autowired
-//    @Qualifier("applicationName")
 
     @Value("${application.name}") //chave tem que estar em resources\application.properties !
     private String applicationName;
-
-    //@Gato
-    @Cachorro
-    private Animal animal;
-
-    @Bean(name = "executarAnimal")
-    public CommandLineRunner executar() {
-        return args -> {
-          this.animal.fazerBarulho();
-        };
-    }
 
     @GetMapping("/hello") // acessar em http://localhost:8080/hello
     public String HelloWorld(){
