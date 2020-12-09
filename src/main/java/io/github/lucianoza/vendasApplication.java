@@ -1,20 +1,27 @@
 package io.github.lucianoza;
 
 import io.github.lucianoza.domain.entity.Cliente;
+import io.github.lucianoza.domain.entity.Pedido;
 import io.github.lucianoza.domain.repository.Clientes;
+import io.github.lucianoza.domain.repository.Pedidos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootApplication
 public class vendasApplication {
 
     @Bean
-    public CommandLineRunner init(@Autowired Clientes clientes){
+    public CommandLineRunner init(
+            @Autowired Clientes clientes,
+            @Autowired Pedidos pedidos
+    ){
         return args -> {
 
             Cliente cliente = new Cliente();
@@ -30,12 +37,29 @@ public class vendasApplication {
 
             System.out.println("---Altera Todos---");
             todosClientes.forEach(c -> {
-                c.setNome(c.getNome() + " atualizado!");
+                c.setNome(c.getNome() + " atu");
                 clientes.save(c);
+
+                //Cria Pedido para o Cliente
+                Pedido p = new Pedido();
+                p.setCliente(c);
+                p.setDataPedido(LocalDate.now());
+                p.setTotal(BigDecimal.valueOf(100));
+
+                pedidos.save(p);
+
+//            Cliente cliente = clientes.findClienteFetchPedidos(fulano.getId());
+//            System.out.println(cliente);
+//            System.out.println(cliente.getPedidos());
+
+                pedidos.findByCliente(c).forEach(System.out::println);
+
+
             });
             todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes Alterados---");
             todosClientes.forEach(System.out::println);
+
             System.out.println(".");
             System.out.println(".");
             System.out.println(".");
@@ -55,7 +79,6 @@ public class vendasApplication {
             todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes Alterados---");
             todosClientes.forEach(System.out::println);
-
 
             System.out.println("deletando cliente");
             //Deletar

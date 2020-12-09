@@ -6,6 +6,7 @@ import java.util.Set;
 @Entity
 @Table(name = "cliente") //ex: (name = "tb_cliente", schema = "vendas") Opcional se nome da tabela = nome da classe
 public class Cliente {
+
     @Id //define chave primária. É obrigatória em uma entidade!
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -14,8 +15,8 @@ public class Cliente {
     @Column(name="nome", length = 100)
     private String nome;
 
-    @OneToMany
-    private Set<Pedido> pedido; //Poderia trocar Ser por List, Collection, etc.
+    @OneToMany(mappedBy="cliente", fetch = FetchType.LAZY) //LAZY = não retornar todos pedidos
+    private Set<Pedido> pedidos; //Poderia trocar Ser por List, Collection, etc.
 
     public Cliente() {
     }
@@ -33,6 +34,14 @@ public class Cliente {
         return id;
     }
 
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -48,7 +57,7 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';
     }
