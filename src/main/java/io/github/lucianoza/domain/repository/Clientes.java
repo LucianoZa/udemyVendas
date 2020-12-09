@@ -2,15 +2,42 @@ package io.github.lucianoza.domain.repository;
 
 import io.github.lucianoza.domain.entity.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 //@Repository tira!
 public interface Clientes extends JpaRepository<Cliente, Integer> {
                                               //Entidade, Tipo do ID da Entidade
+    // select c from Cliente where c.nome like
+    List<Cliente> findByNomeLike(String nome); //Query Métodos
+    //Ou hql
+    @Query(value = " select c from Cliente c where c.nome like %:nome% ")
+    List<Cliente> encontrarPorNomeHQL(@Param("nome") String nome); //Query Métodos
+    //Ou sql nativo
+    @Query(value = " select * from cliente c where c.nome like :nome ", nativeQuery = true)
+    List<Cliente> encontrarPorNomeSQL(@Param("nome") String nome); //Query Métodos
 
-    List<Cliente> findByNomeLike(String nome);
+//    @Query(" delete from Cliente c where c.nome =:nome ")
+//    @Modifying //indica que tem transacao, que não é de consulta apenas
+//    void deleteByNome(String nome);
+//    //ou
+//    @Modifying
+//    void deleteByNome(String nome);
 
+
+    //Pode usar padroes de HQL
+    List<Cliente> findByNomeOrId(String nome, Integer id); //Query Métodos
+
+    List<Cliente> findByNomeLikeOrIdOrderById(String nome, Integer id); //Query Métodos
+
+    //* * * find retorna Lista uma de Objetos
+
+    Cliente findOneByNome(String nome); //Retorna um unico registro ou dá erro!
+
+    boolean existsByNome(String nome);// valida se existe
 
 //    @Autowired
 //    private EntityManager entityManager;

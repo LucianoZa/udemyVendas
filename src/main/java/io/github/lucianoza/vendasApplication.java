@@ -33,22 +33,37 @@ public class vendasApplication {
                 c.setNome(c.getNome() + " atualizado!");
                 clientes.save(c);
             });
-
-            System.out.println("---busca Cli e imprime---");
-            clientes.findByNomeLike("Cli").forEach(System.out::println);
-
+            todosClientes = clientes.findAll();
+            System.out.println("---Lista Todos Clientes Alterados---");
+            todosClientes.forEach(System.out::println);
+            System.out.println(".");
+            System.out.println(".");
+            System.out.println(".");
+            System.out.println(".");
+            System.out.println("---busca Cli findByNomeLike e imprime---");
+            clientes.findByNomeLike("%Cli%").forEach(System.out::println);
+            System.out.println(".");
+            System.out.println("---busca Cli encontrarPorNome HQL e imprime---");
+            clientes.encontrarPorNomeHQL("Luc").forEach(System.out::println);
+            System.out.println(".");
+            System.out.println(".");
+            System.out.println("---busca Cli encontrarPorNome SQL e imprime---");
+            clientes.encontrarPorNomeSQL("Luc%").forEach(System.out::println);
+            System.out.println(".");
+            System.out.println(".");
+            System.out.println(".");
             todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes Alterados---");
             todosClientes.forEach(System.out::println);
 
-            System.out.println(".");
-            System.out.println(".");
-            System.out.println(".");
-//            System.out.println("deletando cliente");
+
+            System.out.println("deletando cliente");
             //Deletar
-//            clientes.obterTodos().forEach(c->{
+//            clientes.findAll().forEach(c->{
 //                clientes.delete(c);
 //            });
+            //clientes.apagaPorNome("Outro Cliente atualizado!");
+            //clientes.deleteByNome("Luciano atualizado!");
 
             todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes após deleção---");
@@ -57,6 +72,10 @@ public class vendasApplication {
             } else {
                 todosClientes.forEach(System.out::println);
             }
+
+            System.out.println("---Testa se Existe---");
+            boolean existe = clientes.existsByNome("Luciano atualizado!");
+            System.out.println("Existe? " + existe);
         };
     }
 

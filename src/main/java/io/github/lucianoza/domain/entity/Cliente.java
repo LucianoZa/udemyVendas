@@ -1,9 +1,10 @@
 package io.github.lucianoza.domain.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-//@Table(name = "cliente") //ex: (name = "tb_cliente", schema = "vendas") Opcional se nome da tabela = nome da classe
+@Table(name = "cliente") //ex: (name = "tb_cliente", schema = "vendas") Opcional se nome da tabela = nome da classe
 public class Cliente {
     @Id //define chave primária. É obrigatória em uma entidade!
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -12,6 +13,9 @@ public class Cliente {
 
     @Column(name="nome", length = 100)
     private String nome;
+
+    @OneToMany
+    private Set<Pedido> pedido; //Poderia trocar Ser por List, Collection, etc.
 
     public Cliente() {
     }
