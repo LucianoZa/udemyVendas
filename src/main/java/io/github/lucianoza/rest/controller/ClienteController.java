@@ -1,28 +1,33 @@
 package io.github.lucianoza.rest.controller;
 
 import io.github.lucianoza.domain.entity.Cliente;
+import io.github.lucianoza.domain.repository.Clientes;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController // ou @Controller
 @RequestMapping("/api/clientes")
 public class ClienteController {
 
-    @RequestMapping(
-            value = "/hello/{nome}", //Opcional: {"/hello/{nome}", "/api/hello", "/api/etc."}
-            method = RequestMethod.GET//,
-            //consumes = {"application/json", "application/xml"},  //minetype = o que eu aceito receber!
-            //produces = {"application/json", "application/xml"}  // indica formato de saida/retorno do servico
-    )
-    @ResponseBody // Indicar que o retorno será no Corpo da pagina!
-    //Se retornar Objeto Cliente formato indicado por produces!
-//            method = RequestMethod.POST,
-//    public Cliente helloCliente(@PathVariable("nome") String nomeCliente
-//            , @RequestBody Cliente cliente //associado consumes acima, indica formato objeto parametro esperado
-//    ) {
-//        return cliente;
-//    }
-// Se retornar String
-    public String helloCliente(@PathVariable("nome") String nomeCliente ) {
-        return String.format("Hello %s ", nomeCliente);
+    private Clientes clientes;
+
+    public ClienteController(Clientes clientes) { //@autowired esta implicito por que é no construtor!
+        this.clientes = clientes;
+    }
+
+    @GetMapping("/{id}") //Substitui RequestMapping
+    @ResponseBody
+    public ResponseEntity getClienteById(@PathVariable Integer id ) {
+        Optional<Cliente> cliente = clientes.findById(id); //Optional = trata se não existir!
+
+        if(cliente.isPresent()) {
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.put("Authorization", "token"); //Exemplo de uso de headers passando token
+//            ResponseEntity<Cliente> responseEntity = new ResponseEntity<>(cliente.get(), headers, HttpStatus.OK);
+            return ResponseEntity.ok(cliente.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 }
