@@ -19,25 +19,25 @@ public class vendasApplication {
 
             Cliente cliente = new Cliente();
             cliente.setNome("Luciano");
-            clientes.salvar(cliente);
+            clientes.save(cliente);
             // ou
-            clientes.salvar(new Cliente("Outro Cliente"));
-            clientes.salvar(new Cliente("Mais um Cliente"));
+            clientes.save(new Cliente("Outro Cliente"));
+            clientes.save(new Cliente("Mais um Cliente"));
 
-            List<Cliente> todosClientes = clientes. obterTodos();
+            List<Cliente> todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes---");
             todosClientes.forEach(System.out::println);
 
             System.out.println("---Altera Todos---");
             todosClientes.forEach(c -> {
                 c.setNome(c.getNome() + " atualizado!");
-                clientes.atualizar(c);
+                clientes.save(c);
             });
 
             System.out.println("---busca Cli e imprime---");
-            clientes.buscarPorNome("Cli").forEach(System.out::println);
+            clientes.findByNomeLike("Cli").forEach(System.out::println);
 
-            todosClientes = clientes.obterTodos();
+            todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes Alterados---");
             todosClientes.forEach(System.out::println);
 
@@ -47,10 +47,10 @@ public class vendasApplication {
 //            System.out.println("deletando cliente");
             //Deletar
 //            clientes.obterTodos().forEach(c->{
-//                clientes.deletar(c);
+//                clientes.delete(c);
 //            });
 
-            todosClientes = clientes.obterTodos();
+            todosClientes = clientes.findAll();
             System.out.println("---Lista Todos Clientes após deleção---");
             if(todosClientes.isEmpty()){
                 System.out.println("Nenhum Cliente Encontrado");
