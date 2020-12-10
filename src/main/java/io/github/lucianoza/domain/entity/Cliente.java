@@ -21,6 +21,9 @@ public class Cliente {
     @OneToMany(mappedBy="cliente", fetch = FetchType.LAZY) //LAZY = não retornar todos pedidos
     private Set<Pedido> pedidos; //Poderia trocar Ser por List, Collection, etc.
 
+    @Column (name = "cpf", length = 11)
+    private String cpf;
+
     public Cliente() {
     }
 
@@ -57,11 +60,20 @@ public class Cliente {
         this.nome = nome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     @Override
     public String toString() {
         return "Cliente{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
                 '}';
     }
 }
