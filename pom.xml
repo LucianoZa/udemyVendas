@@ -36,6 +36,13 @@
             <artifactId>groovy</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <!--lombok adicionado a partir de PedidosServiceImpl-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <!--<version>1.18.16</version>-->
+            <scope>provided</scope>
+        </dependency>
         <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
