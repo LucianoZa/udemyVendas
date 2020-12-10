@@ -30,4 +30,22 @@ public class ClienteController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity save(@RequestBody Cliente cliente) {
+        Cliente clienteSalvo = clientes.save(cliente);
+        return ResponseEntity.ok(clienteSalvo);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity delete(@PathVariable Integer id) { //Delete não tem RequestBody
+        Optional<Cliente> clienteDeletado = clientes.findById(id);
+        if(clienteDeletado.isPresent()) {
+            clientes.delete(clienteDeletado.get());
+            return ResponseEntity.noContent().build(); //noContent por que não precisa retornar nada
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

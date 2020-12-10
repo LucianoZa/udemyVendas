@@ -1,23 +1,16 @@
 package io.github.lucianoza;
-
-import io.github.lucianoza.domain.entity.Cliente;
-import io.github.lucianoza.domain.entity.Pedido;
-import io.github.lucianoza.domain.repository.Clientes;
-import io.github.lucianoza.domain.repository.Pedidos;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
 
 @SpringBootApplication
 public class vendasApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(vendasApplication.class, args);
+    }
+}
+
+/*
 
     @Bean
     //Criando massa para testar chamada da API
@@ -39,12 +32,8 @@ public class vendasApplication {
 
     }
 
-    public static void main(String[] args) {
-        SpringApplication.run(vendasApplication.class, args);
-    }
-}
+-----------------------------------------------------------------------------------
 
-/*
 
 @SpringBootApplication
 public class vendasApplication {
